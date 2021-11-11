@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Article = require('../models/article');
-const {notFound} = require('../config/errorHelper');
+const {notFound, badRequest} = require('../config/errorHelper');
 
 module.exports.findUserById = async (req) => {
   try {
@@ -31,7 +31,10 @@ module.exports.createNewUser = async (req) => {
     return user._id;
 
   } catch (err) {
-    console.log(err);
+    console.log(err.name);
+    if(err.name === 'ValidationError') {
+      throw badRequest('Fields firsName and lastName are required!');
+    }
     throw err;
   }
 }
@@ -51,7 +54,9 @@ module.exports.updateUser = async (req) => {
     return user;
     
   } catch (err) {
-    console.log(err);
+    if(err.name === 'ValidationError') {
+      throw badRequest('Fields firsName and lastName are required!');
+    }
     throw err;
   }
 }

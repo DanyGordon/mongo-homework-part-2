@@ -28,7 +28,7 @@ module.exports.createNewArticle = async (req) => {
   } catch (err) {
     console.log(err);
     if(err.name === 'ValidationError') {
-      throw badRequest(err.errors.name.message);
+      throw badRequest('Fields title, description, category and owner are required!');
     }
     throw err;
   }
@@ -93,7 +93,7 @@ module.exports.updateArticle = async (req) => {
   } catch (err) {
     console.log(err);
     if(err.name === 'ValidationError') {
-      throw badRequest(err.errors.name.message);
+      throw badRequest('Fields title, description, category and owner are required!');
     }
     throw err;
   }
