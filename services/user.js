@@ -31,7 +31,7 @@ module.exports.createNewUser = async (req) => {
     return user._id;
 
   } catch (err) {
-    console.log(err.name);
+    console.log(err);
     if(err.name === 'ValidationError') {
       throw badRequest('Fields firsName and lastName are required!');
     }
@@ -54,6 +54,7 @@ module.exports.updateUser = async (req) => {
     return user;
     
   } catch (err) {
+    console.log(err);
     if(err.name === 'ValidationError') {
       throw badRequest('Fields firsName and lastName are required!');
     }
